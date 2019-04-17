@@ -10,5 +10,7 @@ namespace GAAssessing.Assessment.FA.Components
     public interface IAssessmentComponent
     {
         Task AddAssessment(MotorAssessorReport assessment);
+        Task<List<MotorAssessorReport>> GetAssessmentById(int id);
+        Task<List<MotorAssessorReport>> ListAssessments();
     }
 }

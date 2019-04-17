@@ -1,4 +1,5 @@
 ﻿using GAAssessing.Models.Context;
+using GAAssessing.Models.Helpers;
 using GAAssessing.Models.Models;
 using GAAssessing.Models.Repositories;
 using System;
@@ -16,6 +17,28 @@ namespace GAAssessing.Assessment.FA.Components
         public AssessmentComponent(IRepository repo)
         {
             this._repo = repo;
+        }
+
+        public async Task<List<MotorAssessorReport>> ListAssessments()
+        {
+            var result = await _repo.GetAllAsync<MotorAssessorReport>(includes: new System.Linq.Expressions.Expression<Func<MotorAssessorReport, object>>[]
+            {
+                (m) => m.VehicleCondition
+            });
+
+            return SerializationHelper.ProcessEntity(result.ToList());
+        }
+
+        public async Task<List<MotorAssessorReport>> GetAssessmentById(int id)
+        { 
+            var result = await _repo.GetAsync<MotorAssessorReport>(
+                filter: a => a.Id == id,
+                includes: new System.Linq.Expressions.Expression<Func<MotorAssessorReport, object>>[]
+                {
+                    (m) => m.VehicleCondition
+                });
+
+            return SerializationHelper.ProcessEntity(result.ToList());
         }
 
         public async Task AddAssessment(MotorAssessorReport assessment)
