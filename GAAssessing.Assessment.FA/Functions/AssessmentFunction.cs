@@ -18,7 +18,7 @@ namespace GAAssessing.Assessment.FA.Functions
     public static class AssessmentFunction
     {
         [FunctionName("AddAssessment")]
-        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Function, "post", Route = "Assessment/AddAssessment")]HttpRequestMessage req, 
+        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Function, "post", Route = "assessment/add")]HttpRequestMessage req, 
             TraceWriter log, [Inject] IAssessmentComponent component)
         {
             try
@@ -47,8 +47,8 @@ namespace GAAssessing.Assessment.FA.Functions
             
         }
 
-        [FunctionName("ListAssessments")]
-        public static async Task<HttpResponseMessage> Assessments([HttpTrigger(AuthorizationLevel.Function, "get", Route = "Assessment/All")]HttpRequestMessage req,
+        [FunctionName("all")]
+        public static async Task<HttpResponseMessage> Assessments([HttpTrigger(AuthorizationLevel.Function, "get", Route = "assessment/all")]HttpRequestMessage req,
             TraceWriter log, [Inject] IAssessmentComponent component)
         {
             try
@@ -67,7 +67,7 @@ namespace GAAssessing.Assessment.FA.Functions
         }
 
         [FunctionName("GetAssessmentById")]
-        public static async Task<HttpResponseMessage> GetAssessmentById([HttpTrigger(AuthorizationLevel.Function, "get", Route = "Assessment/id/{id}")]HttpRequestMessage req,
+        public static async Task<HttpResponseMessage> GetAssessmentById([HttpTrigger(AuthorizationLevel.Function, "get", Route = "assessment/id/{id}")]HttpRequestMessage req,
             TraceWriter log, [Inject] IAssessmentComponent component, int id)
         {
             try
