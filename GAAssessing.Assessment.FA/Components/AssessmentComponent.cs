@@ -29,7 +29,7 @@ namespace GAAssessing.Assessment.FA.Components
             return SerializationHelper.ProcessEntity(result.ToList());
         }
 
-        public async Task<List<MotorAssessorReport>> GetAssessmentById(int id)
+        public async Task<MotorAssessorReport> GetAssessmentById(int id)
         { 
             var result = await _repo.GetAsync<MotorAssessorReport>(
                 filter: a => a.Id == id,
@@ -38,7 +38,7 @@ namespace GAAssessing.Assessment.FA.Components
                     (m) => m.VehicleCondition
                 });
 
-            return SerializationHelper.ProcessEntity(result.ToList());
+            return SerializationHelper.ProcessEntity(result.Single());
         }
 
         public async Task AddAssessment(MotorAssessorReport assessment)
